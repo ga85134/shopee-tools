@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🛒 蝦皮賣家 AI 美工工具</title>
+<script src="https://js.puter.com/v2/"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -23,22 +24,27 @@
   header { text-align: center; margin-bottom: 28px; }
   .logo { font-size: 30px; font-weight: 800; letter-spacing: -1px; background: linear-gradient(90deg, #ff6b35, #ff3cac, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
   header p { color: var(--muted); font-size: 13px; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; background: linear-gradient(135deg,#4285f4,#34a853); color: #fff; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; margin: 0 4px; }
+  .badge2 { background: linear-gradient(135deg,#ff6b35,#ff3cac); }
 
+  /* API Section */
   .api-section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
   .api-header { display: flex; align-items: center; justify-content: space-between; }
   .api-header span { font-size: 13px; color: var(--accent2); font-weight: 600; }
   .api-status { font-size: 12px; margin-top: 6px; }
   .api-body { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
   .api-row { display: flex; align-items: center; gap: 12px; }
-  .api-row label { font-size: 12px; color: var(--muted); width: 160px; flex-shrink: 0; }
+  .api-row label { font-size: 12px; color: var(--muted); width: 160px; flex-shrink: 0; line-height: 1.6; }
   .api-row input { flex: 1; background: #f4f6fb; border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; color: var(--text); font-size: 13px; font-family: monospace; outline: none; transition: border .2s; }
   .api-row input:focus { border-color: var(--accent2); }
-  .api-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .api-hint { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .api-hint a { color: var(--accent2); }
+  .free-notice { background: rgba(52,168,83,0.08); border: 1px solid rgba(52,168,83,0.25); border-radius: 10px; padding: 10px 16px; font-size: 12px; color: #16a34a; margin-top: 8px; }
 
+  /* Tabs */
   .tabs { display: flex; gap: 6px; margin-bottom: 20px; background: var(--card); border-radius: 14px; padding: 6px; border: 1px solid var(--border); box-shadow: var(--shadow); }
   .tab-btn { flex: 1; background: transparent; border: none; border-radius: 10px; color: var(--muted); padding: 11px 8px; font-weight: 400; font-size: 14px; cursor: pointer; transition: all .2s; font-family: inherit; }
-  .tab-btn.active { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff; font-weight: 600; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+  .tab-btn.active { background: linear-gradient(135deg,#7c3aed,#6d28d9); color: #fff; font-weight: 600; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
 
   .tab-content { background: var(--card); border-radius: 16px; border: 1px solid var(--border); padding: 24px; box-shadow: var(--shadow); }
   .tab-panel { display: none; }
@@ -96,36 +102,40 @@
   .prompt-tag { background: #f0f2f8; border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--accent2); cursor: pointer; transition: all .2s; }
   .prompt-tag:hover { background: rgba(124,58,237,0.1); border-color: var(--accent2); }
 
-  .gemini-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #4285f4, #34a853); color: white; border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+  .model-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+  .model-btn { background: #f4f6fb; border: 1px solid var(--border); border-radius: 10px; padding: 8px 16px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .2s; font-family: inherit; color: var(--muted); }
+  .model-btn.active { background: linear-gradient(135deg,#7c3aed,#6d28d9); color: #fff; border-color: transparent; box-shadow: 0 2px 10px rgba(124,58,237,0.3); }
 </style>
 </head>
 <body>
 <div class="container">
   <header>
     <div class="logo">🛒 蝦皮賣家 AI 美工工具</div>
-    <p>去背 · AI換背景 · 文字特效 · Powered by Gemini AI <span class="gemini-badge">✨ Nano Banana 2</span></p>
+    <p>
+      去背 · AI換背景 · 文字特效
+      <span class="badge">✨ Nano Banana 2</span>
+      <span class="badge badge2">🎨 GPT Image</span>
+    </p>
   </header>
 
   <!-- API Keys -->
   <div class="api-section">
     <div class="api-header">
-      <span>🔑 API Key 設定</span>
+      <span>🔑 API Key 設定（只有去背需要）</span>
       <button class="btn btn-ghost btn-sm" onclick="toggleApiPanel(this)">展開設定</button>
     </div>
-    <div id="apiStatus" class="api-status" style="color:#f97316">⚠ 尚未設定 API Key</div>
+    <div id="apiStatus" class="api-status" style="color:#16a34a">✅ AI換背景完全免費，不需要任何 Key！</div>
     <div class="api-body" id="apiPanel" style="display:none">
-      <div class="api-row">
-        <label>Gemini API Key <br><span style="font-size:10px;color:#b0b4c8">（AI換背景用）</span></label>
-        <input type="password" id="geminiKey" placeholder="AIzaSy..." oninput="updateApiStatus()" />
+      <div class="free-notice">
+        🎉 <strong>AI換背景 + 文字特效完全免費！</strong><br>
+        使用 Puter.js 技術，不需要任何 API Key，直接點選就能生成！<br>
+        只有「去背」功能才需要 Clipdrop Key。
       </div>
       <div class="api-row">
-        <label>Clipdrop API Key <br><span style="font-size:10px;color:#b0b4c8">（去背用）</span></label>
-        <input type="password" id="clipdropKey" placeholder="Clipdrop API Key" oninput="updateApiStatus()" />
+        <label>Clipdrop API Key<br><span style="font-size:10px;color:#b0b4c8">去背功能用，每月100次免費</span></label>
+        <input type="password" id="clipdropKey" placeholder="貼上 Clipdrop API Key（可選）" oninput="updateApiStatus()" />
       </div>
-      <div class="api-hint">
-        Gemini Key 👉 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com</a> ·
-        Clipdrop Key 👉 <a href="https://clipdrop.co/apis" target="_blank">clipdrop.co/apis</a>（每月100次免費）
-      </div>
+      <div class="api-hint">👉 <a href="https://clipdrop.co/apis" target="_blank">clipdrop.co/apis</a> 免費申請</div>
     </div>
   </div>
 
@@ -144,7 +154,7 @@
         <input type="file" id="fi0" accept="image/*" multiple style="display:none" onchange="handleBatch(this.files)">
         <div class="dz-icon">🖼️</div>
         <h3>拖曳或點擊上傳（可多張）</h3>
-        <p>支援 JPG、PNG、WEBP</p>
+        <p>支援 JPG、PNG、WEBP · 需要 Clipdrop API Key</p>
       </div>
       <div class="batch-grid" id="batchGrid"></div>
       <div class="btn-row" id="batchBtns" style="display:none">
@@ -160,7 +170,7 @@
           <input type="file" id="fi1" accept="image/*" style="display:none" onchange="handleAiBgFile(this.files[0])">
           <div class="dz-icon">🖼️</div>
           <h3>拖曳或點擊上傳商品圖片</h3>
-          <p>支援 JPG、PNG、WEBP · AI 會自動去背並生成新背景</p>
+          <p>🎉 完全免費！不需要任何 API Key</p>
         </div>
       </div>
       <div id="aibg-work" style="display:none">
@@ -171,29 +181,49 @@
           </div>
           <div class="arrow-col">➜</div>
           <div class="preview-col">
-            <div class="preview-label">✨ Gemini AI 換背景結果</div>
-            <div class="img-box" id="aibg-result-box"><div class="img-placeholder">輸入描述後點「AI 生成背景」</div></div>
+            <div class="preview-label">✨ AI 換背景結果</div>
+            <div class="img-box" id="aibg-result-box"><div class="img-placeholder">選擇模型並輸入描述後生成</div></div>
           </div>
         </div>
+
         <div id="aibg-status" style="display:none"></div>
 
-        <div class="option-label" style="margin-bottom:8px">💡 快速選擇背景風格</div>
-        <div class="prompt-tags">
-          <span class="prompt-tag" onclick="setPrompt('純白簡約電商背景，商品置中，專業商品攝影，乾淨白色背景，輕微陰影')">🤍 純白電商</span>
-          <span class="prompt-tag" onclick="setPrompt('淡粉色夢幻背景，柔和光暈，玫瑰花瓣裝飾，適合女性商品，溫柔浪漫風格')">🌸 粉嫩夢幻</span>
-          <span class="prompt-tag" onclick="setPrompt('木質桌面背景，自然光線，咖啡廳氛圍，溫暖棕色調，生活感')">🪵 木質自然</span>
-          <span class="prompt-tag" onclick="setPrompt('科技感深藍色漸層背景，光點粒子效果，現代簡約，高端質感')">💙 科技深藍</span>
-          <span class="prompt-tag" onclick="setPrompt('戶外草地背景，陽光灑落，清新自然，藍天白雲，夏日氛圍')">🌿 戶外清新</span>
-          <span class="prompt-tag" onclick="setPrompt('奢華黑色大理石背景，金色光澤反射，高端精品風格，質感燈光')">🖤 奢華黑金</span>
-          <span class="prompt-tag" onclick="setPrompt('聖誕節氣氛背景，紅綠色調，雪花裝飾，溫馨節日感，禮物盒')">🎄 聖誕節慶</span>
-          <span class="prompt-tag" onclick="setPrompt('簡約淡灰色漸層背景，柔和光線，專業電商風格，乾淨俐落')">🩶 簡約灰調</span>
-          <span class="prompt-tag" onclick="setPrompt('水藍色海洋背景，清透感，夏日海灘，清涼氛圍，波光粼粼')">🌊 清涼海洋</span>
-          <span class="prompt-tag" onclick="setPrompt('秋天楓葉背景，橙紅色調，溫暖季節感，自然散景')">🍂 秋意暖橙</span>
+        <!-- 模型選擇 -->
+        <div class="option-label" style="margin-bottom:8px">🤖 選擇 AI 模型</div>
+        <div class="model-selector">
+          <button class="model-btn active" onclick="setModel('gemini-2.5-flash-image-preview',this)">
+            🍌 Nano Banana 2<br><span style="font-size:10px;font-weight:400">Gemini Flash（快速）</span>
+          </button>
+          <button class="model-btn" onclick="setModel('gemini-3-pro-image-preview',this)">
+            🍌 Nano Banana Pro<br><span style="font-size:10px;font-weight:400">Gemini Pro（高品質）</span>
+          </button>
+          <button class="model-btn" onclick="setModel('gpt-image-1.5',this)">
+            🤖 GPT Image 1.5<br><span style="font-size:10px;font-weight:400">OpenAI（超強）</span>
+          </button>
+          <button class="model-btn" onclick="setModel('gpt-image-1',this)">
+            🤖 GPT Image 1<br><span style="font-size:10px;font-weight:400">OpenAI（穩定）</span>
+          </button>
         </div>
 
-        <input type="text" class="text-input" id="aibgPrompt" placeholder="或自己輸入背景描述，越詳細效果越好！例如：高級珠寶店展示台，黑色絨布背景，柔和燈光..." />
+        <!-- 快速標籤 -->
+        <div class="option-label" style="margin-bottom:8px">💡 快速選擇背景風格</div>
+        <div class="prompt-tags">
+          <span class="prompt-tag" onclick="setPrompt('pure white clean ecommerce background, professional product photography, soft shadow')">🤍 純白電商</span>
+          <span class="prompt-tag" onclick="setPrompt('soft pink dreamy background, rose petals, gentle light bokeh, feminine romantic style')">🌸 粉嫩夢幻</span>
+          <span class="prompt-tag" onclick="setPrompt('wooden table surface, natural warm light, cafe atmosphere, cozy lifestyle feel')">🪵 木質自然</span>
+          <span class="prompt-tag" onclick="setPrompt('tech dark blue gradient background, glowing particles, modern minimalist, premium quality')">💙 科技深藍</span>
+          <span class="prompt-tag" onclick="setPrompt('outdoor green grass, sunlight, blue sky, fresh summer nature atmosphere')">🌿 戶外清新</span>
+          <span class="prompt-tag" onclick="setPrompt('luxury black marble background, gold reflection, high-end premium product display')">🖤 奢華黑金</span>
+          <span class="prompt-tag" onclick="setPrompt('christmas holiday background, red green colors, snowflakes, warm festive decoration')">🎄 聖誕節慶</span>
+          <span class="prompt-tag" onclick="setPrompt('minimal light gray gradient background, soft lighting, clean professional ecommerce')">🩶 簡約灰調</span>
+          <span class="prompt-tag" onclick="setPrompt('ocean beach sand background, turquoise water, summer tropical fresh cool atmosphere')">🌊 清涼海洋</span>
+          <span class="prompt-tag" onclick="setPrompt('autumn maple leaves, warm orange red tones, cozy seasonal nature bokeh')">🍂 秋意暖橙</span>
+        </div>
+
+        <input type="text" class="text-input" id="aibgPrompt" placeholder="或自己輸入背景描述（建議用英文效果更好），例如：luxury jewelry store display, black velvet background..." />
+
         <div class="btn-row">
-          <button class="btn btn-orange" id="aibgGenBtn" onclick="aibgGenerate()">✨ Gemini AI 生成背景</button>
+          <button class="btn btn-orange" id="aibgGenBtn" onclick="aibgGenerate()">✨ 免費 AI 生成背景</button>
           <button id="aibg-download" class="btn btn-primary" onclick="downloadAiBg()" style="display:none">⬇ 下載結果</button>
           <button class="btn btn-ghost" onclick="resetAiBg()">🔄 重新上傳</button>
         </div>
@@ -207,7 +237,7 @@
           <input type="file" id="fi2" accept="image/*" style="display:none" onchange="handleTextFile(this.files[0])">
           <div class="dz-icon">🖼️</div>
           <h3>拖曳或點擊上傳商品圖片</h3>
-          <p>支援 JPG、PNG、WEBP</p>
+          <p>🎉 完全免費！不需要任何 API Key</p>
         </div>
       </div>
       <div id="text-work" style="display:none">
@@ -256,22 +286,24 @@ let batchItems = [];
 let aiBgOriginal = null, aiBgResult = null;
 let textOriginal = null, textResult = null;
 let textPos = 'bottom', textStyle = 'white-bg';
+let selectedModel = 'gemini-2.5-flash-image-preview';
 
-function getGeminiKey() { return document.getElementById('geminiKey').value.trim(); }
 function getClipdropKey() { return document.getElementById('clipdropKey').value.trim(); }
-
+function setModel(model, el) {
+  selectedModel = model;
+  document.querySelectorAll('.model-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
 function toggleApiPanel(btn) {
   const p = document.getElementById('apiPanel');
-  if (p.style.display === 'none') { p.style.display = 'flex'; btn.textContent = '收起'; }
-  else { p.style.display = 'none'; btn.textContent = '展開設定'; }
+  if (p.style.display==='none') { p.style.display='flex'; btn.textContent='收起'; }
+  else { p.style.display='none'; btn.textContent='展開設定'; }
 }
 function updateApiStatus() {
   const s = document.getElementById('apiStatus');
-  const gk = getGeminiKey(), ck = getClipdropKey();
-  if (gk && ck) { s.style.color='#16a34a'; s.textContent='✅ 兩個 Key 都已設定，所有功能可用！'; }
-  else if (gk) { s.style.color='#d97706'; s.textContent='⚠ Gemini Key 已設定，但去背需要 Clipdrop Key'; }
-  else if (ck) { s.style.color='#d97706'; s.textContent='⚠ Clipdrop Key 已設定，但 AI換背景需要 Gemini Key'; }
-  else { s.style.color='#f97316'; s.textContent='⚠ 尚未設定 API Key'; }
+  const ck = getClipdropKey();
+  if (ck) { s.style.color='#16a34a'; s.textContent='✅ Clipdrop Key 已設定，去背功能可用！AI換背景免費不需要Key'; }
+  else { s.style.color='#16a34a'; s.textContent='✅ AI換背景完全免費，不需要任何 Key！（去背需要 Clipdrop Key）'; }
 }
 
 // ── Clipdrop 去背 ──
@@ -285,66 +317,43 @@ async function clipdropRemoveBg(dataUrl) {
     method: 'POST', headers: { 'x-api-key': key }, body: fd
   });
   if (!res.ok) {
-    if (res.status===401) throw new Error('Clipdrop API Key 無效');
-    if (res.status===402) throw new Error('Clipdrop 額度已用完');
+    if (res.status===401) throw new Error('Clipdrop Key 無效');
+    if (res.status===402) throw new Error('Clipdrop 額度用完');
     throw new Error(`去背失敗 (${res.status})`);
   }
   return blobToDataUrl(await res.blob());
 }
 
-// ── Gemini AI 換背景 ──
-async function geminiReplaceBg(imageDataUrl, prompt) {
-  const key = getGeminiKey();
-  if (!key) throw new Error('請先設定 Gemini API Key！');
+// ── Puter.js AI換背景 ──
+async function puterGenerateBg(imageDataUrl, prompt, model) {
+  // Convert dataUrl to blob URL for puter
+  const blob = dataUrlToBlob(imageDataUrl);
+  const blobUrl = URL.createObjectURL(blob);
 
-  const base64 = imageDataUrl.split(',')[1];
-  const mimeType = imageDataUrl.split(';')[0].split(':')[1];
+  const img = await puter.ai.txt2img(prompt, {
+    model: model,
+    image_url: blobUrl
+  });
 
-  const requestBody = {
-    contents: [{
-      parts: [
-        {
-          inline_data: {
-            mime_type: mimeType,
-            data: base64
-          }
-        },
-        {
-          text: `這是一張商品圖片。請幫我把背景替換成：${prompt}。
-保持商品主體完整不變，只更換背景。
-生成一張高品質的電商商品圖，背景要自然融合，光影要真實。
-直接輸出替換背景後的完整圖片。`
-        }
-      ]
-    }],
-    generationConfig: {
-      responseModalities: ["TEXT", "IMAGE"]
-    }
-  };
+  URL.revokeObjectURL(blobUrl);
 
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent?key=${key}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody)
-    }
-  );
-
-  if (!res.ok) {
-    const err = await res.json().catch(()=>({}));
-    const msg = err.error?.message || `API 錯誤 (${res.status})`;
-    if (res.status===400) throw new Error('請求格式錯誤：' + msg);
-    if (res.status===403) throw new Error('Gemini API Key 無效或無權限');
-    throw new Error(msg);
-  }
-
-  const data = await res.json();
-  const parts = data.candidates?.[0]?.content?.parts || [];
-  const imgPart = parts.find(p => p.inline_data);
-  if (!imgPart) throw new Error('Gemini 沒有回傳圖片，請重試或換個描述');
-
-  return `data:${imgPart.inline_data.mime_type};base64,${imgPart.inline_data.data}`;
+  // Convert img element src to dataUrl
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas');
+    const tempImg = new Image();
+    tempImg.crossOrigin = 'anonymous';
+    tempImg.onload = () => {
+      canvas.width = tempImg.naturalWidth;
+      canvas.height = tempImg.naturalHeight;
+      canvas.getContext('2d').drawImage(tempImg, 0, 0);
+      resolve(canvas.toDataURL('image/png'));
+    };
+    tempImg.onerror = () => {
+      // If crossOrigin fails, just use the src directly
+      resolve(img.src);
+    };
+    tempImg.src = img.src;
+  });
 }
 
 // ── Helpers ──
@@ -358,36 +367,34 @@ function dataUrlToBlob(dataUrl) {
 }
 function makeImg(src) { const i = document.createElement('img'); i.src = src; return i; }
 function dlFile(url, name) { const a = document.createElement('a'); a.href = url; a.download = name; a.click(); }
-
 function switchTab(i) {
   document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', i===j));
   document.querySelectorAll('.tab-panel').forEach((p,j) => p.classList.toggle('active', i===j));
 }
-function dzDrag(e, id, on) { e.preventDefault(); document.getElementById(id).classList.toggle('drag', on); }
-function dzDrop(e, id) {
+function dzDrag(e,id,on) { e.preventDefault(); document.getElementById(id).classList.toggle('drag',on); }
+function dzDrop(e,id) {
   e.preventDefault(); document.getElementById(id).classList.remove('drag');
-  const files = [...e.dataTransfer.files];
-  if (id==='dz0') handleBatch(files);
-  else if (id==='dz1') handleAiBgFile(files[0]);
-  else if (id==='dz2') handleTextFile(files[0]);
+  const files=[...e.dataTransfer.files];
+  if(id==='dz0') handleBatch(files);
+  else if(id==='dz1') handleAiBgFile(files[0]);
+  else if(id==='dz2') handleTextFile(files[0]);
 }
 
 // ── Tab 0: 批量去背 ──
 async function handleBatch(files) {
-  const arr = Array.isArray(files) ? files : [...files];
-  for (const f of arr) {
-    if (!f.type.startsWith('image/')) continue;
-    batchItems.push({ id: Math.random().toString(36).slice(2), name: f.name, original: await fileToDataUrl(f), result: null, status: 'ready' });
+  const arr = Array.isArray(files)?files:[...files];
+  for(const f of arr) {
+    if(!f.type.startsWith('image/')) continue;
+    batchItems.push({id:Math.random().toString(36).slice(2),name:f.name,original:await fileToDataUrl(f),result:null,status:'ready'});
   }
   renderBatch();
 }
 function renderBatch() {
-  const grid = document.getElementById('batchGrid');
-  const btns = document.getElementById('batchBtns');
-  if (!batchItems.length) { grid.innerHTML=''; btns.style.display='none'; return; }
+  const grid=document.getElementById('batchGrid'), btns=document.getElementById('batchBtns');
+  if(!batchItems.length){grid.innerHTML='';btns.style.display='none';return;}
   btns.style.display='flex';
-  document.getElementById('batchProcessBtn').textContent = `✂️ 開始去背（${batchItems.filter(i=>!i.result).length} 張）`;
-  grid.innerHTML = batchItems.map(item => `
+  document.getElementById('batchProcessBtn').textContent=`✂️ 開始去背（${batchItems.filter(i=>!i.result).length} 張）`;
+  grid.innerHTML=batchItems.map(item=>`
     <div class="batch-item">
       <div class="batch-item-imgs">
         <div class="img-box" style="min-height:100px"><img src="${item.original}" style="max-height:100px;width:100%;object-fit:contain"></div>
@@ -406,29 +413,29 @@ function renderBatch() {
     </div>`).join('');
 }
 async function processBatch() {
-  const btn = document.getElementById('batchProcessBtn'); btn.disabled=true;
-  for (const item of batchItems.filter(i=>!i.result)) {
-    item.status='processing'; renderBatch();
-    try { item.result=await clipdropRemoveBg(item.original); item.status='done'; }
-    catch(e) { item.status='error'; item.error=e.message; }
+  const btn=document.getElementById('batchProcessBtn');btn.disabled=true;
+  for(const item of batchItems.filter(i=>!i.result)){
+    item.status='processing';renderBatch();
+    try{item.result=await clipdropRemoveBg(item.original);item.status='done';}
+    catch(e){item.status='error';item.error=e.message;}
     renderBatch();
   }
   btn.disabled=false;
 }
-function dlBatch(id) { const i=batchItems.find(x=>x.id===id); if(i?.result) dlFile(i.result, i.name.replace(/\.[^.]+$/,'')+'_去背.png'); }
-function rmBatch(id) { batchItems=batchItems.filter(i=>i.id!==id); renderBatch(); }
-function clearBatch() { batchItems=[]; renderBatch(); }
+function dlBatch(id){const i=batchItems.find(x=>x.id===id);if(i?.result)dlFile(i.result,i.name.replace(/\.[^.]+$/,'')+'_去背.png');}
+function rmBatch(id){batchItems=batchItems.filter(i=>i.id!==id);renderBatch();}
+function clearBatch(){batchItems=[];renderBatch();}
 
 // ── Tab 1: AI換背景 ──
 async function handleAiBgFile(file) {
-  if (!file) return;
-  aiBgOriginal = await fileToDataUrl(file);
+  if(!file)return;
+  aiBgOriginal=await fileToDataUrl(file);
   document.getElementById('aibg-upload').style.display='none';
   document.getElementById('aibg-work').style.display='block';
   document.getElementById('aibg-original').src=aiBgOriginal;
 }
-function setPrompt(text) { document.getElementById('aibgPrompt').value=text; }
-function setAiBgStatus(msg, isError) {
+function setPrompt(text){document.getElementById('aibgPrompt').value=text;}
+function setAiBgStatus(msg,isError){
   const el=document.getElementById('aibg-status');
   el.style.display=msg?'block':'none';
   el.className=isError?'error-box':'status-box';
@@ -436,83 +443,114 @@ function setAiBgStatus(msg, isError) {
 }
 async function aibgGenerate() {
   const prompt=document.getElementById('aibgPrompt').value.trim();
-  if (!prompt) return alert('請輸入背景描述或點選上方快速標籤！');
-  const btn=document.getElementById('aibgGenBtn'); btn.disabled=true;
-  setAiBgStatus('✨ Gemini AI 正在生成背景，請稍候（約15-30秒）...');
+  if(!prompt)return alert('請輸入背景描述或點選上方快速標籤！');
+  const btn=document.getElementById('aibgGenBtn');btn.disabled=true;
+  const modelName = document.querySelector('.model-btn.active').textContent.split('\n')[0].trim();
+  setAiBgStatus(`✨ ${modelName} 生成中，請稍候（約15-40秒）...`);
   const box=document.getElementById('aibg-result-box');
-  box.innerHTML='<div class="spinner-wrap"><div class="spinner"></div><p>Gemini AI 生成中...</p></div>';
+  box.innerHTML='<div class="spinner-wrap"><div class="spinner"></div><p>AI 生成背景中...</p></div>';
   try {
-    aiBgResult = await geminiReplaceBg(aiBgOriginal, prompt);
-    box.innerHTML=''; box.appendChild(makeImg(aiBgResult));
+    const fullPrompt = `Product photo with replaced background: ${prompt}. Keep the product exactly as is, only change the background. High quality commercial product photography.`;
+    aiBgResult = await puterGenerateBg(aiBgOriginal, fullPrompt, selectedModel);
+    box.innerHTML='';
+    const resultImg = document.createElement('img');
+    resultImg.src = aiBgResult;
+    box.appendChild(resultImg);
     document.getElementById('aibg-download').style.display='inline-block';
-    setAiBgStatus('✅ 完成！不滿意可以換個描述重新生成');
+    setAiBgStatus('✅ 完成！不滿意可以換個描述或模型重新生成');
   } catch(e) {
-    setAiBgStatus('❌ ' + e.message, true);
-    box.innerHTML='<div class="img-placeholder">生成失敗，請重試</div>';
+    // 如果 image_url 不支援，嘗試只用文字描述
+    try {
+      setAiBgStatus(`⏳ 切換方式重試中...`);
+      const img = await puter.ai.txt2img(
+        `Ecommerce product image with background: ${prompt}. Professional product photography, high quality.`,
+        { model: selectedModel }
+      );
+      aiBgResult = img.src;
+      box.innerHTML='';
+      box.appendChild(img);
+      document.getElementById('aibg-download').style.display='inline-block';
+      setAiBgStatus('✅ 完成！（注意：此模式為純文字生成背景）');
+    } catch(e2) {
+      setAiBgStatus('❌ 生成失敗：' + (e2.message||e.message), true);
+      box.innerHTML='<div class="img-placeholder">生成失敗，請換個模型或描述重試</div>';
+    }
   }
   btn.disabled=false;
 }
-function downloadAiBg() { if(aiBgResult) dlFile(aiBgResult,'AI換背景結果.png'); }
-function resetAiBg() {
+function downloadAiBg(){
+  if(!aiBgResult)return;
+  if(aiBgResult.startsWith('data:')){
+    dlFile(aiBgResult,'AI換背景結果.png');
+  } else {
+    // For blob/external URLs, fetch and convert
+    fetch(aiBgResult).then(r=>r.blob()).then(b=>{
+      const url=URL.createObjectURL(b);
+      dlFile(url,'AI換背景結果.png');
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+    }).catch(()=>window.open(aiBgResult,'_blank'));
+  }
+}
+function resetAiBg(){
   aiBgOriginal=aiBgResult=null;
   document.getElementById('aibg-upload').style.display='block';
   document.getElementById('aibg-work').style.display='none';
   document.getElementById('aibg-download').style.display='none';
-  document.getElementById('aibg-result-box').innerHTML='<div class="img-placeholder">輸入描述後點「AI 生成背景」</div>';
-  setAiBgStatus(''); document.getElementById('fi1').value='';
+  document.getElementById('aibg-result-box').innerHTML='<div class="img-placeholder">選擇模型並輸入描述後生成</div>';
+  setAiBgStatus('');document.getElementById('fi1').value='';
 }
 
 // ── Tab 2: 文字特效 ──
-async function handleTextFile(file) {
-  if(!file) return;
+async function handleTextFile(file){
+  if(!file)return;
   textOriginal=await fileToDataUrl(file);
   document.getElementById('text-upload').style.display='none';
   document.getElementById('text-work').style.display='block';
   document.getElementById('text-original').src=textOriginal;
 }
-function setOpt(type,val,el) {
-  if(type==='pos') textPos=val; if(type==='style') textStyle=val;
+function setOpt(type,val,el){
+  if(type==='pos')textPos=val;if(type==='style')textStyle=val;
   el.closest('.option-btns').querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
 }
-function applyText() {
+function applyText(){
   const text=document.getElementById('textContent').value.trim();
-  if(!text) return alert('請輸入文字！');
+  if(!text)return alert('請輸入文字！');
   const img=new Image();
   img.onload=()=>{
     const canvas=document.createElement('canvas');
-    canvas.width=img.width; canvas.height=img.height;
+    canvas.width=img.width;canvas.height=img.height;
     const ctx=canvas.getContext('2d');
     ctx.drawImage(img,0,0);
     const fontSize=Math.max(28,Math.floor(img.width*0.065));
     ctx.font=`800 ${fontSize}px 'Noto Sans TC',sans-serif`;
     ctx.textAlign='center';
     let y=textPos==='top'?img.height*0.11:textPos==='center'?img.height*0.52:img.height*0.89;
-    const m=ctx.measureText(text), pad=fontSize*0.45;
-    const bx=img.width/2-m.width/2-pad, bw=m.width+pad*2, bh=fontSize+pad*1.2, by=y-fontSize-pad*0.3;
-    ctx.shadowColor='transparent'; ctx.shadowBlur=0;
+    const m=ctx.measureText(text),pad=fontSize*0.45;
+    const bx=img.width/2-m.width/2-pad,bw=m.width+pad*2,bh=fontSize+pad*1.2,by=y-fontSize-pad*0.3;
+    ctx.shadowColor='transparent';ctx.shadowBlur=0;
     if(textStyle==='white-bg'){
-      ctx.fillStyle='rgba(255,255,255,0.92)'; ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,10); ctx.fill();
-      ctx.fillStyle='#1a1a2e'; ctx.fillText(text,img.width/2,y);
-    } else if(textStyle==='dark-bg'){
-      ctx.fillStyle='rgba(0,0,0,0.68)'; ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,10); ctx.fill();
-      ctx.fillStyle='#ffffff'; ctx.fillText(text,img.width/2,y);
-    } else if(textStyle==='glow'){
-      ctx.shadowColor='rgba(255,107,53,0.95)'; ctx.shadowBlur=22;
-      ctx.fillStyle='#ffffff'; ctx.fillText(text,img.width/2,y); ctx.shadowBlur=0;
-    } else if(textStyle==='outline'){
-      ctx.strokeStyle='#ff6b35'; ctx.lineWidth=fontSize*0.08;
-      ctx.strokeText(text,img.width/2,y); ctx.fillStyle='#ffffff'; ctx.fillText(text,img.width/2,y);
+      ctx.fillStyle='rgba(255,255,255,0.92)';ctx.beginPath();ctx.roundRect(bx,by,bw,bh,10);ctx.fill();
+      ctx.fillStyle='#1a1a2e';ctx.fillText(text,img.width/2,y);
+    }else if(textStyle==='dark-bg'){
+      ctx.fillStyle='rgba(0,0,0,0.68)';ctx.beginPath();ctx.roundRect(bx,by,bw,bh,10);ctx.fill();
+      ctx.fillStyle='#ffffff';ctx.fillText(text,img.width/2,y);
+    }else if(textStyle==='glow'){
+      ctx.shadowColor='rgba(255,107,53,0.95)';ctx.shadowBlur=22;
+      ctx.fillStyle='#ffffff';ctx.fillText(text,img.width/2,y);ctx.shadowBlur=0;
+    }else if(textStyle==='outline'){
+      ctx.strokeStyle='#ff6b35';ctx.lineWidth=fontSize*0.08;
+      ctx.strokeText(text,img.width/2,y);ctx.fillStyle='#ffffff';ctx.fillText(text,img.width/2,y);
     }
     textResult=canvas.toDataURL('image/png');
     const box=document.getElementById('text-result-box');
-    box.innerHTML=''; box.appendChild(makeImg(textResult));
+    box.innerHTML='';box.appendChild(makeImg(textResult));
     document.getElementById('text-download').style.display='inline-block';
   };
   img.src=textOriginal;
 }
-function downloadText() { if(textResult) dlFile(textResult,'文字特效結果.png'); }
-function resetText() {
+function downloadText(){if(textResult)dlFile(textResult,'文字特效結果.png');}
+function resetText(){
   textOriginal=textResult=null;
   document.getElementById('text-upload').style.display='block';
   document.getElementById('text-work').style.display='none';
