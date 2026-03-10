@@ -18,54 +18,47 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { min-height: 100vh; background: var(--bg); font-family: 'Noto Sans TC', sans-serif; color: var(--text); padding: 32px 16px; }
-  .container { max-width: 900px; margin: 0 auto; }
+  .container { max-width: 920px; margin: 0 auto; }
 
-  /* Header */
   header { text-align: center; margin-bottom: 28px; }
   .logo { font-size: 30px; font-weight: 800; letter-spacing: -1px; background: linear-gradient(90deg, #ff6b35, #ff3cac, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
   header p { color: var(--muted); font-size: 13px; }
 
-  /* API Section */
   .api-section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
   .api-header { display: flex; align-items: center; justify-content: space-between; }
   .api-header span { font-size: 13px; color: var(--accent2); font-weight: 600; }
   .api-status { font-size: 12px; margin-top: 6px; }
   .api-body { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
   .api-row { display: flex; align-items: center; gap: 12px; }
-  .api-row label { font-size: 12px; color: var(--muted); width: 130px; flex-shrink: 0; }
+  .api-row label { font-size: 12px; color: var(--muted); width: 160px; flex-shrink: 0; }
   .api-row input { flex: 1; background: #f4f6fb; border: 1px solid var(--border); border-radius: 8px; padding: 9px 14px; color: var(--text); font-size: 13px; font-family: monospace; outline: none; transition: border .2s; }
   .api-row input:focus { border-color: var(--accent2); }
   .api-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
   .api-hint a { color: var(--accent2); }
 
-  /* Tabs */
   .tabs { display: flex; gap: 6px; margin-bottom: 20px; background: var(--card); border-radius: 14px; padding: 6px; border: 1px solid var(--border); box-shadow: var(--shadow); }
   .tab-btn { flex: 1; background: transparent; border: none; border-radius: 10px; color: var(--muted); padding: 11px 8px; font-weight: 400; font-size: 14px; cursor: pointer; transition: all .2s; font-family: inherit; }
   .tab-btn.active { background: linear-gradient(135deg, #7c3aed, #6d28d9); color: #fff; font-weight: 600; box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
 
-  /* Tab Content */
   .tab-content { background: var(--card); border-radius: 16px; border: 1px solid var(--border); padding: 24px; box-shadow: var(--shadow); }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* Drop Zone */
   .drop-zone { border: 2px dashed rgba(124,58,237,0.35); border-radius: 16px; padding: 48px 24px; text-align: center; cursor: pointer; background: rgba(124,58,237,0.03); transition: all .25s; margin-bottom: 20px; }
   .drop-zone:hover, .drop-zone.drag { border-color: var(--accent); background: rgba(255,107,53,0.04); }
   .drop-zone .dz-icon { font-size: 46px; margin-bottom: 12px; }
   .drop-zone h3 { font-size: 16px; font-weight: 600; color: var(--accent2); margin-bottom: 4px; }
   .drop-zone p { font-size: 12px; color: var(--muted); }
 
-  /* Preview */
   .preview-grid { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; align-items: flex-start; }
-  .preview-col { flex: 1 1 180px; }
+  .preview-col { flex: 1 1 200px; }
   .preview-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600; }
-  .img-box { width: 100%; min-height: 160px; border-radius: 12px; border: 1px solid var(--border); background: #f0f2f8; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .img-box img { width: 100%; max-height: 240px; object-fit: contain; display: block; }
+  .img-box { width: 100%; min-height: 180px; border-radius: 12px; border: 1px solid var(--border); background: #f0f2f8; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .img-box img { width: 100%; max-height: 260px; object-fit: contain; display: block; }
   .img-box.checker { background: repeating-conic-gradient(#d8dce8 0% 25%, #eef0f6 0% 50%) 0 0 / 18px 18px; }
   .img-placeholder { color: #b0b4c8; font-size: 12px; text-align: center; padding: 16px; }
   .arrow-col { display: flex; align-items: center; padding-top: 44px; font-size: 22px; color: var(--accent); flex-shrink: 0; }
 
-  /* Batch */
   .batch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin-bottom: 20px; }
   .batch-item { background: #f8f9fd; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
   .batch-item-imgs { display: flex; gap: 4px; padding: 8px; }
@@ -73,13 +66,11 @@
   .batch-item-footer { padding: 0 10px 10px; display: flex; align-items: center; gap: 6px; }
   .batch-item-name { flex: 1; font-size: 11px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-  /* Spinner */
   .spinner-wrap { text-align: center; padding: 20px; }
   .spinner { width: 36px; height: 36px; border: 3px solid rgba(124,58,237,0.15); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 10px; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spinner-wrap p { color: var(--accent2); font-size: 12px; }
 
-  /* Buttons */
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
   .btn { border: none; border-radius: 10px; padding: 12px 24px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all .2s; font-family: inherit; }
   .btn:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
@@ -89,49 +80,51 @@
   .btn-sm { padding: 5px 12px; font-size: 12px; border-radius: 7px; }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; filter: none !important; }
 
-  /* Input */
   .text-input { width: 100%; background: #f4f6fb; border: 1px solid rgba(124,58,237,0.25); border-radius: 10px; padding: 12px 16px; color: var(--text); font-size: 14px; outline: none; transition: border .2s; font-family: inherit; margin-bottom: 12px; }
   .text-input:focus { border-color: var(--accent2); }
 
-  /* Option Buttons */
   .option-group { margin-bottom: 14px; }
   .option-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
   .option-btns { display: flex; gap: 6px; flex-wrap: wrap; }
   .opt-btn { background: #f4f6fb; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); padding: 7px 14px; font-size: 12px; cursor: pointer; transition: all .2s; font-family: inherit; }
   .opt-btn.active { background: rgba(255,107,53,0.1); border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
-  /* Status */
   .status-box { background: rgba(124,58,237,0.07); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; color: var(--accent2); font-size: 13px; }
   .error-box { background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; color: #dc2626; font-size: 13px; }
 
-  /* Prompt suggestions */
   .prompt-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
   .prompt-tag { background: #f0f2f8; border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; font-size: 12px; color: var(--accent2); cursor: pointer; transition: all .2s; }
   .prompt-tag:hover { background: rgba(124,58,237,0.1); border-color: var(--accent2); }
+
+  .gemini-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #4285f4, #34a853); color: white; border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; margin-left: 8px; }
 </style>
 </head>
 <body>
 <div class="container">
   <header>
     <div class="logo">🛒 蝦皮賣家 AI 美工工具</div>
-    <p>去背 · AI換背景 · 文字特效 · Powered by Clipdrop AI</p>
+    <p>去背 · AI換背景 · 文字特效 · Powered by Gemini AI <span class="gemini-badge">✨ Nano Banana 2</span></p>
   </header>
 
-  <!-- API Key -->
+  <!-- API Keys -->
   <div class="api-section">
     <div class="api-header">
       <span>🔑 API Key 設定</span>
       <button class="btn btn-ghost btn-sm" onclick="toggleApiPanel(this)">展開設定</button>
     </div>
-    <div id="apiStatus" class="api-status" style="color:#f97316">⚠ 尚未設定 Clipdrop API Key</div>
+    <div id="apiStatus" class="api-status" style="color:#f97316">⚠ 尚未設定 API Key</div>
     <div class="api-body" id="apiPanel" style="display:none">
       <div class="api-row">
-        <label>Clipdrop API Key</label>
-        <input type="password" id="clipdropKey" placeholder="貼上 Clipdrop API Key" oninput="updateApiStatus()" />
+        <label>Gemini API Key <br><span style="font-size:10px;color:#b0b4c8">（AI換背景用）</span></label>
+        <input type="password" id="geminiKey" placeholder="AIzaSy..." oninput="updateApiStatus()" />
+      </div>
+      <div class="api-row">
+        <label>Clipdrop API Key <br><span style="font-size:10px;color:#b0b4c8">（去背用）</span></label>
+        <input type="password" id="clipdropKey" placeholder="Clipdrop API Key" oninput="updateApiStatus()" />
       </div>
       <div class="api-hint">
-        👉 前往 <a href="https://clipdrop.co/apis" target="_blank">clipdrop.co/apis</a> 免費申請，100次免費額度 ·
-        去背 + AI換背景都用這一個 Key！
+        Gemini Key 👉 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com</a> ·
+        Clipdrop Key 👉 <a href="https://clipdrop.co/apis" target="_blank">clipdrop.co/apis</a>（每月100次免費）
       </div>
     </div>
   </div>
@@ -167,7 +160,7 @@
           <input type="file" id="fi1" accept="image/*" style="display:none" onchange="handleAiBgFile(this.files[0])">
           <div class="dz-icon">🖼️</div>
           <h3>拖曳或點擊上傳商品圖片</h3>
-          <p>支援 JPG、PNG、WEBP</p>
+          <p>支援 JPG、PNG、WEBP · AI 會自動去背並生成新背景</p>
         </div>
       </div>
       <div id="aibg-work" style="display:none">
@@ -178,27 +171,29 @@
           </div>
           <div class="arrow-col">➜</div>
           <div class="preview-col">
-            <div class="preview-label">✨ AI換背景結果</div>
-            <div class="img-box checker" id="aibg-result-box"><div class="img-placeholder">輸入描述後點「生成背景」</div></div>
+            <div class="preview-label">✨ Gemini AI 換背景結果</div>
+            <div class="img-box" id="aibg-result-box"><div class="img-placeholder">輸入描述後點「AI 生成背景」</div></div>
           </div>
         </div>
         <div id="aibg-status" style="display:none"></div>
 
         <div class="option-label" style="margin-bottom:8px">💡 快速選擇背景風格</div>
         <div class="prompt-tags">
-          <span class="prompt-tag" onclick="setPrompt('純白簡約電商背景，專業商品攝影風格')">🤍 純白電商</span>
-          <span class="prompt-tag" onclick="setPrompt('淡粉色系夢幻背景，柔和光線，適合女性商品')">🌸 粉嫩夢幻</span>
-          <span class="prompt-tag" onclick="setPrompt('木質桌面背景，自然溫暖氛圍，咖啡廳風格')">🪵 木質自然</span>
-          <span class="prompt-tag" onclick="setPrompt('科技感深藍色漸層背景，現代簡約風格')">💙 科技深藍</span>
-          <span class="prompt-tag" onclick="setPrompt('戶外草地陽光背景，清新自然，夏日氛圍')">🌿 戶外清新</span>
-          <span class="prompt-tag" onclick="setPrompt('奢華黑色背景，金色光澤，高端質感')">🖤 奢華黑金</span>
-          <span class="prompt-tag" onclick="setPrompt('聖誕節節日氣氛背景，紅綠色調，溫馨喜慶')">🎄 節慶喜氣</span>
-          <span class="prompt-tag" onclick="setPrompt('簡約灰色水泥牆背景，工業風，現代感')">🩶 工業灰調</span>
+          <span class="prompt-tag" onclick="setPrompt('純白簡約電商背景，商品置中，專業商品攝影，乾淨白色背景，輕微陰影')">🤍 純白電商</span>
+          <span class="prompt-tag" onclick="setPrompt('淡粉色夢幻背景，柔和光暈，玫瑰花瓣裝飾，適合女性商品，溫柔浪漫風格')">🌸 粉嫩夢幻</span>
+          <span class="prompt-tag" onclick="setPrompt('木質桌面背景，自然光線，咖啡廳氛圍，溫暖棕色調，生活感')">🪵 木質自然</span>
+          <span class="prompt-tag" onclick="setPrompt('科技感深藍色漸層背景，光點粒子效果，現代簡約，高端質感')">💙 科技深藍</span>
+          <span class="prompt-tag" onclick="setPrompt('戶外草地背景，陽光灑落，清新自然，藍天白雲，夏日氛圍')">🌿 戶外清新</span>
+          <span class="prompt-tag" onclick="setPrompt('奢華黑色大理石背景，金色光澤反射，高端精品風格，質感燈光')">🖤 奢華黑金</span>
+          <span class="prompt-tag" onclick="setPrompt('聖誕節氣氛背景，紅綠色調，雪花裝飾，溫馨節日感，禮物盒')">🎄 聖誕節慶</span>
+          <span class="prompt-tag" onclick="setPrompt('簡約淡灰色漸層背景，柔和光線，專業電商風格，乾淨俐落')">🩶 簡約灰調</span>
+          <span class="prompt-tag" onclick="setPrompt('水藍色海洋背景，清透感，夏日海灘，清涼氛圍，波光粼粼')">🌊 清涼海洋</span>
+          <span class="prompt-tag" onclick="setPrompt('秋天楓葉背景，橙紅色調，溫暖季節感，自然散景')">🍂 秋意暖橙</span>
         </div>
 
-        <input type="text" class="text-input" id="aibgPrompt" placeholder="或自己輸入背景描述，例如：海邊沙灘、城市夜景、簡約白色..." />
+        <input type="text" class="text-input" id="aibgPrompt" placeholder="或自己輸入背景描述，越詳細效果越好！例如：高級珠寶店展示台，黑色絨布背景，柔和燈光..." />
         <div class="btn-row">
-          <button class="btn btn-orange" id="aibgGenBtn" onclick="aibgGenerate()">🎨 AI 生成背景</button>
+          <button class="btn btn-orange" id="aibgGenBtn" onclick="aibgGenerate()">✨ Gemini AI 生成背景</button>
           <button id="aibg-download" class="btn btn-primary" onclick="downloadAiBg()" style="display:none">⬇ 下載結果</button>
           <button class="btn btn-ghost" onclick="resetAiBg()">🔄 重新上傳</button>
         </div>
@@ -257,14 +252,13 @@
 </div>
 
 <script>
-// ── State ──
 let batchItems = [];
 let aiBgOriginal = null, aiBgResult = null;
 let textOriginal = null, textResult = null;
 let textPos = 'bottom', textStyle = 'white-bg';
 
-// ── API ──
-function getKey() { return document.getElementById('clipdropKey').value.trim(); }
+function getGeminiKey() { return document.getElementById('geminiKey').value.trim(); }
+function getClipdropKey() { return document.getElementById('clipdropKey').value.trim(); }
 
 function toggleApiPanel(btn) {
   const p = document.getElementById('apiPanel');
@@ -273,80 +267,102 @@ function toggleApiPanel(btn) {
 }
 function updateApiStatus() {
   const s = document.getElementById('apiStatus');
-  const key = getKey();
-  s.style.color = key ? '#16a34a' : '#f97316';
-  s.textContent = key ? '✅ Clipdrop API Key 已設定，去背 + AI換背景都可以用！' : '⚠ 尚未設定 Clipdrop API Key';
+  const gk = getGeminiKey(), ck = getClipdropKey();
+  if (gk && ck) { s.style.color='#16a34a'; s.textContent='✅ 兩個 Key 都已設定，所有功能可用！'; }
+  else if (gk) { s.style.color='#d97706'; s.textContent='⚠ Gemini Key 已設定，但去背需要 Clipdrop Key'; }
+  else if (ck) { s.style.color='#d97706'; s.textContent='⚠ Clipdrop Key 已設定，但 AI換背景需要 Gemini Key'; }
+  else { s.style.color='#f97316'; s.textContent='⚠ 尚未設定 API Key'; }
 }
 
-// ── Clipdrop: Remove BG ──
+// ── Clipdrop 去背 ──
 async function clipdropRemoveBg(dataUrl) {
-  const key = getKey();
+  const key = getClipdropKey();
   if (!key) throw new Error('請先設定 Clipdrop API Key！');
   const blob = dataUrlToBlob(dataUrl);
   const fd = new FormData();
   fd.append('image_file', blob, 'image.png');
   const res = await fetch('https://clipdrop-api.co/remove-background/v1', {
-    method: 'POST',
-    headers: { 'x-api-key': key },
-    body: fd
+    method: 'POST', headers: { 'x-api-key': key }, body: fd
   });
   if (!res.ok) {
-    const txt = await res.text().catch(()=>'');
-    if (res.status === 401) throw new Error('API Key 無效，請確認是否正確');
-    if (res.status === 402) throw new Error('額度已用完，請至 Clipdrop 加值');
-    throw new Error(`去背失敗 (${res.status}): ${txt}`);
+    if (res.status===401) throw new Error('Clipdrop API Key 無效');
+    if (res.status===402) throw new Error('Clipdrop 額度已用完');
+    throw new Error(`去背失敗 (${res.status})`);
   }
-  const resBlob = await res.blob();
-  return blobToDataUrl(resBlob);
+  return blobToDataUrl(await res.blob());
 }
 
-// ── Clipdrop: Replace Background ──
-async function clipdropReplaceBg(dataUrl, prompt) {
-  const key = getKey();
-  if (!key) throw new Error('請先設定 Clipdrop API Key！');
-  const blob = dataUrlToBlob(dataUrl);
-  const fd = new FormData();
-  fd.append('image_file', blob, 'image.png');
-  fd.append('prompt', prompt);
-  const res = await fetch('https://clipdrop-api.co/replace-background/v1', {
-    method: 'POST',
-    headers: { 'x-api-key': key },
-    body: fd
-  });
+// ── Gemini AI 換背景 ──
+async function geminiReplaceBg(imageDataUrl, prompt) {
+  const key = getGeminiKey();
+  if (!key) throw new Error('請先設定 Gemini API Key！');
+
+  const base64 = imageDataUrl.split(',')[1];
+  const mimeType = imageDataUrl.split(';')[0].split(':')[1];
+
+  const requestBody = {
+    contents: [{
+      parts: [
+        {
+          inline_data: {
+            mime_type: mimeType,
+            data: base64
+          }
+        },
+        {
+          text: `這是一張商品圖片。請幫我把背景替換成：${prompt}。
+保持商品主體完整不變，只更換背景。
+生成一張高品質的電商商品圖，背景要自然融合，光影要真實。
+直接輸出替換背景後的完整圖片。`
+        }
+      ]
+    }],
+    generationConfig: {
+      responseModalities: ["TEXT", "IMAGE"]
+    }
+  };
+
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent?key=${key}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody)
+    }
+  );
+
   if (!res.ok) {
-    const txt = await res.text().catch(()=>'');
-    if (res.status === 401) throw new Error('API Key 無效，請確認是否正確');
-    if (res.status === 402) throw new Error('額度已用完，請至 Clipdrop 加值');
-    throw new Error(`背景生成失敗 (${res.status}): ${txt}`);
+    const err = await res.json().catch(()=>({}));
+    const msg = err.error?.message || `API 錯誤 (${res.status})`;
+    if (res.status===400) throw new Error('請求格式錯誤：' + msg);
+    if (res.status===403) throw new Error('Gemini API Key 無效或無權限');
+    throw new Error(msg);
   }
-  const resBlob = await res.blob();
-  return blobToDataUrl(resBlob);
+
+  const data = await res.json();
+  const parts = data.candidates?.[0]?.content?.parts || [];
+  const imgPart = parts.find(p => p.inline_data);
+  if (!imgPart) throw new Error('Gemini 沒有回傳圖片，請重試或換個描述');
+
+  return `data:${imgPart.inline_data.mime_type};base64,${imgPart.inline_data.data}`;
 }
 
 // ── Helpers ──
-function fileToDataUrl(file) {
-  return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result); r.readAsDataURL(file); });
-}
-function blobToDataUrl(blob) {
-  return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result); r.readAsDataURL(blob); });
-}
+function fileToDataUrl(file) { return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result); r.readAsDataURL(file); }); }
+function blobToDataUrl(blob) { return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result); r.readAsDataURL(blob); }); }
 function dataUrlToBlob(dataUrl) {
   const arr = dataUrl.split(','), mime = arr[0].match(/:(.*?);/)[1];
-  const bstr = atob(arr[1]); let n = bstr.length;
-  const u8arr = new Uint8Array(n);
-  while(n--) u8arr[n] = bstr.charCodeAt(n);
-  return new Blob([u8arr], { type: mime });
+  const bstr = atob(arr[1]); let n = bstr.length; const u8 = new Uint8Array(n);
+  while(n--) u8[n] = bstr.charCodeAt(n);
+  return new Blob([u8], {type: mime});
 }
 function makeImg(src) { const i = document.createElement('img'); i.src = src; return i; }
-function dlFile(dataUrl, name) { const a = document.createElement('a'); a.href = dataUrl; a.download = name; a.click(); }
+function dlFile(url, name) { const a = document.createElement('a'); a.href = url; a.download = name; a.click(); }
 
-// ── Tabs ──
 function switchTab(i) {
   document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', i===j));
   document.querySelectorAll('.tab-panel').forEach((p,j) => p.classList.toggle('active', i===j));
 }
-
-// ── Drop Zone ──
 function dzDrag(e, id, on) { e.preventDefault(); document.getElementById(id).classList.toggle('drag', on); }
 function dzDrop(e, id) {
   e.preventDefault(); document.getElementById(id).classList.remove('drag');
@@ -356,13 +372,12 @@ function dzDrop(e, id) {
   else if (id==='dz2') handleTextFile(files[0]);
 }
 
-// ── Tab 0: Batch Remove BG ──
+// ── Tab 0: 批量去背 ──
 async function handleBatch(files) {
   const arr = Array.isArray(files) ? files : [...files];
   for (const f of arr) {
     if (!f.type.startsWith('image/')) continue;
-    const original = await fileToDataUrl(f);
-    batchItems.push({ id: Math.random().toString(36).slice(2), name: f.name, original, result: null, status: 'ready' });
+    batchItems.push({ id: Math.random().toString(36).slice(2), name: f.name, original: await fileToDataUrl(f), result: null, status: 'ready' });
   }
   renderBatch();
 }
@@ -370,9 +385,8 @@ function renderBatch() {
   const grid = document.getElementById('batchGrid');
   const btns = document.getElementById('batchBtns');
   if (!batchItems.length) { grid.innerHTML=''; btns.style.display='none'; return; }
-  btns.style.display = 'flex';
-  const pending = batchItems.filter(i=>!i.result).length;
-  document.getElementById('batchProcessBtn').textContent = `✂️ 開始去背（${pending} 張）`;
+  btns.style.display='flex';
+  document.getElementById('batchProcessBtn').textContent = `✂️ 開始去背（${batchItems.filter(i=>!i.result).length} 張）`;
   grid.innerHTML = batchItems.map(item => `
     <div class="batch-item">
       <div class="batch-item-imgs">
@@ -386,137 +400,118 @@ function renderBatch() {
       </div>
       <div class="batch-item-footer">
         <span class="batch-item-name">${item.name}</span>
-        ${item.result?`<button class="btn btn-orange btn-sm" onclick="dlBatchItem('${item.id}')">⬇</button>`:''}
-        <button class="btn btn-ghost btn-sm" onclick="rmBatchItem('${item.id}')">✕</button>
+        ${item.result?`<button class="btn btn-orange btn-sm" onclick="dlBatch('${item.id}')">⬇</button>`:''}
+        <button class="btn btn-ghost btn-sm" onclick="rmBatch('${item.id}')">✕</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 async function processBatch() {
-  const btn = document.getElementById('batchProcessBtn');
-  btn.disabled = true;
+  const btn = document.getElementById('batchProcessBtn'); btn.disabled=true;
   for (const item of batchItems.filter(i=>!i.result)) {
-    item.status = 'processing'; renderBatch();
-    try {
-      item.result = await clipdropRemoveBg(item.original);
-      item.status = 'done';
-    } catch(e) { item.status='error'; item.error=e.message; }
+    item.status='processing'; renderBatch();
+    try { item.result=await clipdropRemoveBg(item.original); item.status='done'; }
+    catch(e) { item.status='error'; item.error=e.message; }
     renderBatch();
   }
-  btn.disabled = false;
+  btn.disabled=false;
 }
-function dlBatchItem(id) {
-  const item = batchItems.find(i=>i.id===id);
-  if (item?.result) dlFile(item.result, item.name.replace(/\.[^.]+$/,'')+'_去背.png');
-}
-function rmBatchItem(id) { batchItems = batchItems.filter(i=>i.id!==id); renderBatch(); }
+function dlBatch(id) { const i=batchItems.find(x=>x.id===id); if(i?.result) dlFile(i.result, i.name.replace(/\.[^.]+$/,'')+'_去背.png'); }
+function rmBatch(id) { batchItems=batchItems.filter(i=>i.id!==id); renderBatch(); }
 function clearBatch() { batchItems=[]; renderBatch(); }
 
 // ── Tab 1: AI換背景 ──
 async function handleAiBgFile(file) {
   if (!file) return;
   aiBgOriginal = await fileToDataUrl(file);
-  document.getElementById('aibg-upload').style.display = 'none';
-  document.getElementById('aibg-work').style.display = 'block';
-  document.getElementById('aibg-original').src = aiBgOriginal;
+  document.getElementById('aibg-upload').style.display='none';
+  document.getElementById('aibg-work').style.display='block';
+  document.getElementById('aibg-original').src=aiBgOriginal;
 }
-function setPrompt(text) { document.getElementById('aibgPrompt').value = text; }
+function setPrompt(text) { document.getElementById('aibgPrompt').value=text; }
 function setAiBgStatus(msg, isError) {
-  const el = document.getElementById('aibg-status');
-  el.style.display = msg ? 'block' : 'none';
-  el.className = isError ? 'error-box' : 'status-box';
-  el.textContent = msg;
+  const el=document.getElementById('aibg-status');
+  el.style.display=msg?'block':'none';
+  el.className=isError?'error-box':'status-box';
+  el.textContent=msg;
 }
 async function aibgGenerate() {
-  const prompt = document.getElementById('aibgPrompt').value.trim();
+  const prompt=document.getElementById('aibgPrompt').value.trim();
   if (!prompt) return alert('請輸入背景描述或點選上方快速標籤！');
-  const btn = document.getElementById('aibgGenBtn');
-  btn.disabled = true;
-  setAiBgStatus('🎨 Clipdrop AI 生成背景中，請稍候（約10-30秒）...');
-  const box = document.getElementById('aibg-result-box');
-  box.innerHTML = '<div class="spinner-wrap"><div class="spinner"></div><p>AI 生成中...</p></div>';
+  const btn=document.getElementById('aibgGenBtn'); btn.disabled=true;
+  setAiBgStatus('✨ Gemini AI 正在生成背景，請稍候（約15-30秒）...');
+  const box=document.getElementById('aibg-result-box');
+  box.innerHTML='<div class="spinner-wrap"><div class="spinner"></div><p>Gemini AI 生成中...</p></div>';
   try {
-    aiBgResult = await clipdropReplaceBg(aiBgOriginal, prompt);
-    box.innerHTML = '';
-    box.appendChild(makeImg(aiBgResult));
-    document.getElementById('aibg-download').style.display = 'inline-block';
-    setAiBgStatus('✅ 完成！如果不滿意可以換個描述再試一次');
+    aiBgResult = await geminiReplaceBg(aiBgOriginal, prompt);
+    box.innerHTML=''; box.appendChild(makeImg(aiBgResult));
+    document.getElementById('aibg-download').style.display='inline-block';
+    setAiBgStatus('✅ 完成！不滿意可以換個描述重新生成');
   } catch(e) {
     setAiBgStatus('❌ ' + e.message, true);
-    box.innerHTML = '<div class="img-placeholder">生成失敗，請重試</div>';
+    box.innerHTML='<div class="img-placeholder">生成失敗，請重試</div>';
   }
-  btn.disabled = false;
+  btn.disabled=false;
 }
-function downloadAiBg() { if (aiBgResult) dlFile(aiBgResult, 'AI換背景結果.png'); }
+function downloadAiBg() { if(aiBgResult) dlFile(aiBgResult,'AI換背景結果.png'); }
 function resetAiBg() {
-  aiBgOriginal = aiBgResult = null;
-  document.getElementById('aibg-upload').style.display = 'block';
-  document.getElementById('aibg-work').style.display = 'none';
-  document.getElementById('aibg-download').style.display = 'none';
-  document.getElementById('aibg-result-box').innerHTML = '<div class="img-placeholder">輸入描述後點「生成背景」</div>';
-  setAiBgStatus('');
-  document.getElementById('fi1').value = '';
+  aiBgOriginal=aiBgResult=null;
+  document.getElementById('aibg-upload').style.display='block';
+  document.getElementById('aibg-work').style.display='none';
+  document.getElementById('aibg-download').style.display='none';
+  document.getElementById('aibg-result-box').innerHTML='<div class="img-placeholder">輸入描述後點「AI 生成背景」</div>';
+  setAiBgStatus(''); document.getElementById('fi1').value='';
 }
 
 // ── Tab 2: 文字特效 ──
 async function handleTextFile(file) {
-  if (!file) return;
-  textOriginal = await fileToDataUrl(file);
-  document.getElementById('text-upload').style.display = 'none';
-  document.getElementById('text-work').style.display = 'block';
-  document.getElementById('text-original').src = textOriginal;
+  if(!file) return;
+  textOriginal=await fileToDataUrl(file);
+  document.getElementById('text-upload').style.display='none';
+  document.getElementById('text-work').style.display='block';
+  document.getElementById('text-original').src=textOriginal;
 }
-function setOpt(type, val, el) {
-  if (type==='pos') textPos=val;
-  if (type==='style') textStyle=val;
+function setOpt(type,val,el) {
+  if(type==='pos') textPos=val; if(type==='style') textStyle=val;
   el.closest('.option-btns').querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
 }
 function applyText() {
-  const text = document.getElementById('textContent').value.trim();
-  if (!text) return alert('請輸入文字！');
-  const img = new Image();
-  img.onload = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = img.width; canvas.height = img.height;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    const fontSize = Math.max(28, Math.floor(img.width * 0.065));
-    ctx.font = `800 ${fontSize}px 'Noto Sans TC', sans-serif`;
-    ctx.textAlign = 'center';
-    let y = textPos==='top' ? img.height*0.11 : textPos==='center' ? img.height*0.52 : img.height*0.89;
-    const metrics = ctx.measureText(text);
-    const pad = fontSize * 0.45;
-    const bx = img.width/2 - metrics.width/2 - pad;
-    const bw = metrics.width + pad*2;
-    const bh = fontSize + pad*1.2;
-    const by = y - fontSize - pad*0.3;
-    ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0;
-    if (textStyle==='white-bg') {
-      ctx.fillStyle='rgba(255,255,255,0.92)';
-      ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,10); ctx.fill();
-      ctx.fillStyle='#1a1a2e'; ctx.fillText(text, img.width/2, y);
-    } else if (textStyle==='dark-bg') {
-      ctx.fillStyle='rgba(0,0,0,0.68)';
-      ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,10); ctx.fill();
-      ctx.fillStyle='#ffffff'; ctx.fillText(text, img.width/2, y);
-    } else if (textStyle==='glow') {
+  const text=document.getElementById('textContent').value.trim();
+  if(!text) return alert('請輸入文字！');
+  const img=new Image();
+  img.onload=()=>{
+    const canvas=document.createElement('canvas');
+    canvas.width=img.width; canvas.height=img.height;
+    const ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0);
+    const fontSize=Math.max(28,Math.floor(img.width*0.065));
+    ctx.font=`800 ${fontSize}px 'Noto Sans TC',sans-serif`;
+    ctx.textAlign='center';
+    let y=textPos==='top'?img.height*0.11:textPos==='center'?img.height*0.52:img.height*0.89;
+    const m=ctx.measureText(text), pad=fontSize*0.45;
+    const bx=img.width/2-m.width/2-pad, bw=m.width+pad*2, bh=fontSize+pad*1.2, by=y-fontSize-pad*0.3;
+    ctx.shadowColor='transparent'; ctx.shadowBlur=0;
+    if(textStyle==='white-bg'){
+      ctx.fillStyle='rgba(255,255,255,0.92)'; ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,10); ctx.fill();
+      ctx.fillStyle='#1a1a2e'; ctx.fillText(text,img.width/2,y);
+    } else if(textStyle==='dark-bg'){
+      ctx.fillStyle='rgba(0,0,0,0.68)'; ctx.beginPath(); ctx.roundRect(bx,by,bw,bh,10); ctx.fill();
+      ctx.fillStyle='#ffffff'; ctx.fillText(text,img.width/2,y);
+    } else if(textStyle==='glow'){
       ctx.shadowColor='rgba(255,107,53,0.95)'; ctx.shadowBlur=22;
-      ctx.fillStyle='#ffffff'; ctx.fillText(text, img.width/2, y);
-      ctx.shadowBlur=0;
-    } else if (textStyle==='outline') {
+      ctx.fillStyle='#ffffff'; ctx.fillText(text,img.width/2,y); ctx.shadowBlur=0;
+    } else if(textStyle==='outline'){
       ctx.strokeStyle='#ff6b35'; ctx.lineWidth=fontSize*0.08;
-      ctx.strokeText(text, img.width/2, y);
-      ctx.fillStyle='#ffffff'; ctx.fillText(text, img.width/2, y);
+      ctx.strokeText(text,img.width/2,y); ctx.fillStyle='#ffffff'; ctx.fillText(text,img.width/2,y);
     }
-    textResult = canvas.toDataURL('image/png');
-    const box = document.getElementById('text-result-box');
+    textResult=canvas.toDataURL('image/png');
+    const box=document.getElementById('text-result-box');
     box.innerHTML=''; box.appendChild(makeImg(textResult));
     document.getElementById('text-download').style.display='inline-block';
   };
-  img.src = textOriginal;
+  img.src=textOriginal;
 }
-function downloadText() { if (textResult) dlFile(textResult, '文字特效結果.png'); }
+function downloadText() { if(textResult) dlFile(textResult,'文字特效結果.png'); }
 function resetText() {
   textOriginal=textResult=null;
   document.getElementById('text-upload').style.display='block';
